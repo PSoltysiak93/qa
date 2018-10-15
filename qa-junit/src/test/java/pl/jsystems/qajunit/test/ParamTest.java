@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParamTest {
 //    @Nested
-    @DisplayName("Parameterized test")
+//    @DisplayName("Parameterized test")
 //    class NestedClass(
 
 
