@@ -71,9 +71,9 @@ public class JunitTest {
         assertAll(() -> {
 
                     assertEquals("testowyString", testowyString);
-                    assertThat(testowyString, containsString("StrinDDD"));
+                    assertThat(testowyString, containsString("Strin"));
                     assertThat(testowyString, equalTo("testowyString"));
-                    assertThat(testowyString, endsWith("inSSSgS"));
+                    assertThat(testowyString, endsWith("ing"));
 
                 }
 

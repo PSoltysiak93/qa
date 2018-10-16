@@ -1,4 +1,4 @@
-package pl.jsystems.qajunit.test;
+package pl.systems.qajunit;
 
 public class GamePlay {
 
