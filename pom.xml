@@ -13,6 +13,7 @@
     <modules>
         <module>qa-junit</module>
         <module>qa-frontend</module>
+        <module>qaapi</module>
     </modules>
 
     <properties>
@@ -102,6 +103,30 @@
                 <artifactId>cucumber-picocontainer</artifactId>
                 <version>1.2.5</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>3.1.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.9.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.9.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.9.3</version>
             </dependency>
 
 
