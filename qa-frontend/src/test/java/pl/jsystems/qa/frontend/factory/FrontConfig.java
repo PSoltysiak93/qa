@@ -48,9 +48,9 @@ public class FrontConfig {
 
     }
 
-//    @AfterEach
-//    public void teareDown() {
-//        driver.quit();
-//        driver = null;
-//        }
+    @AfterEach
+    public void teareDown() {
+        driver.quit();
+        driver = null;
+        }
 }
