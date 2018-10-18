@@ -1,17 +1,14 @@
 package pl.jsystems.qa.frontend.cucumber.steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pl.jsystems.qa.frontend.CucumberStepConfig;
+import pl.jsystems.qa.frontend.cucumber.CucumberStepConfig;
 import pl.jsystems.qa.frontend.cucumber.page.DiaryTestPage;
 
 import java.util.Set;

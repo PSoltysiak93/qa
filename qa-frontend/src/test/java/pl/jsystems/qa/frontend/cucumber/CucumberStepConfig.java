@@ -1,4 +1,4 @@
-package pl.jsystems.qa.frontend;
+package pl.jsystems.qa.frontend.cucumber;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -22,7 +22,7 @@ public class CucumberStepConfig {
 
 
 
-    @Before
+//    @Before
     public WebDriver setUp() {
         WebDriverManager.chromedriver().setup();
         System.out.println("================== @Before Frontend Cucumber =====================");
@@ -62,10 +62,10 @@ public class CucumberStepConfig {
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
-            driver.quit();
-            driver = null;
-            driver.close();
         }
+        driver.quit();
+        driver = null;
+//        driver.close();
     }
 }
 
