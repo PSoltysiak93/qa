@@ -129,6 +129,58 @@
                 <version>2.9.3</version>
             </dependency>
 
+            <!--<dependency>-->
+                <!--<groupId>com.google.truth</groupId>-->
+                <!--<artifactId>truth</artifactId>-->
+                <!--<version>0.39</version>-->
+                <!--<scope>test</scope>-->
+            <!--</dependency>-->
+
+            <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc -->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>11.2.0.3</version>
+            </dependency>
+
+
+
+            <!-- https://mvnrepository.com/artifact/org.awaitility/awaitility -->
+            <dependency>
+                <groupId>org.awaitility</groupId>
+                <artifactId>awaitility</artifactId>
+                <version>3.1.2</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.jcabi</groupId>
+                <artifactId>jcabi-matchers</artifactId>
+                <version>1.4</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jdbi</groupId>
+                <artifactId>jdbi</artifactId>
+                <version>2.78</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jdbi</groupId>
+                <artifactId>jdbi3</artifactId>
+                <version>3.0.0-beta2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jdbi</groupId>
+                <artifactId>jdbi3-sqlobject</artifactId>
+                <version>3.1.1</version>
+            </dependency>
+
+
+
+
 
         </dependencies>
 

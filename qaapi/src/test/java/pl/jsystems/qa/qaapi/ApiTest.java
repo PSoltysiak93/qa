@@ -1,22 +1,34 @@
 package pl.jsystems.qa.qaapi;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pl.jsystems.qa.qaapi.model.MyUser;
-import pl.jsystems.qa.qaapi.model.User;
+import pl.jsystems.qa.qaapi.dbservice.UserDao;
+import pl.jsystems.qa.qaapi.jdbiservice.UserJdbiService;
+import pl.jsystems.qa.qaapi.model.*;
 import pl.jsystems.qa.qaapi.model.error.ErrorResponse;
 import pl.jsystems.qa.qaapi.service.UserService;
 import pl.jsystems.qa.qaapi.specification.Specifications;
+import sun.misc.JavaUtilZipFileAccess;
 
+import javax.jws.soap.SOAPBinding;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
+
+import static org.awaitility.Awaitility.await;
 import static org.hamcrest.core.Is.is;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Api tests")
 public class ApiTest {
@@ -136,10 +148,108 @@ public class ApiTest {
 
     @Test
     @DisplayName("Error rest assured test")
-    public void getErrorResponse(){
+    public void getErrorResponse() {
         ErrorResponse errorResponse = UserService.getUserErrorResponse();
         assertThat(errorResponse.Error.errorCode, is(400));
-        assertThat(errorResponse.Error.validationError,equalTo("invalid_email"));
+        assertThat(errorResponse.Error.validationError, equalTo("invalid_email"));
         assertThat(errorResponse.Error.message, equalTo("your email is invalid"));
     }
+
+    @Test
+    @DisplayName("Post assured test")
+    public void postUser() {
+        String[] emptyTable = UserService.postMyUser(new MyUser("Adam", "Majewski"));
+
+        assertTrue(Arrays.asList(emptyTable).isEmpty());
+
+    }
+
+    @Test
+    @DisplayName("Int generic test")
+    public void genericIntTest() throws IOException {
+
+        Response response = UserService.getGeneric("/5b05bf3f3200007100ebfa04");
+
+        UserGeneric<Integer> userGeneric = new ObjectMapper().readValue(
+                response
+                        .then()
+                        .extract()
+                        .body()
+                        .asInputStream(), new TypeReference<UserGeneric<Integer>>() {
+                }
+        );
+
+        assertThat(userGeneric.id, is(1));
+    }
+
+    @Test
+    @DisplayName("String generic test")
+    public void genericStringTest() throws IOException {
+
+        Response response = UserService.getGeneric("/5b05c83e3200009700ebfa2b");
+
+        UserGeneric<String> userGeneric = new ObjectMapper().readValue(
+                response
+                        .then()
+                        .extract()
+                        .body()
+                        .asInputStream(), new TypeReference<UserGeneric<String>>() {
+                }
+        );
+
+        assertThat(userGeneric.id, equalTo("1a"));
+    }
+
+    @Test
+    @DisplayName("Get User Azure by ID")
+    public void azureUser() {
+        UserAzure userAzure = UserService.getUserAzureByID(1);
+        assertThat(userAzure.id, is(1));
+        assertThat(userAzure.userName, equalTo("User 1"));
+        assertThat(userAzure.password, equalTo("Password1"));
+    }
+
+    @Test
+    public void testowy() {
+        System.out.println(UserService.getGeneric("5b05c83e3200009700ebfa2b").prettyPeek());
+    }
+
+
+    @Test
+    public void dbTest() {
+        UserDBTest userDBTest = UserDao.getOneById(1);
+        System.out.println(userDBTest);
+
+        List<UserDBTest> users = UserDao.getAll();
+        System.out.println(users);
+
+        UserDao.saveOne(new UserDBTest(4, "Paweł", "Nowak"));
+        UserDao.saveOne(new UserDBTest(5, "Łukasz", "Mi"));
+        System.out.println(UserDao.getOneById(4));
+
+
+        UserDao.update(new UserDBTest(1, "Piotr", "Nowak"), 1);
+        System.out.println(UserDao.getOneById(1));
+
+//        UserDao.delete(4);
+//        System.out.println(UserDao.getOneById(4));
+
+
+    }
+
+    @Test
+    public void awaitility() {
+        await().untilAsserted(() -> {
+            assertThat(UserService.getUserAzureByID(1).id, is(1));
+            assertThat(UserDao.getOneById(1).getId(), is(1));
+        });
+    }
+
+    @Test
+    public void jdbiTest(){
+        assertThat(UserJdbiService.getTestUser(1L).getId(), is(1L));
+
+    }
+
 }
+
